@@ -1,0 +1,36 @@
+/* Sahibinden Araç Analiz v5 */
+
+.shb-container {
+  position: absolute !important;
+  bottom: 4px !important;
+  left: 4px !important;
+  display: flex !important;
+  gap: 3px !important;
+  z-index: 9999 !important;
+  flex-wrap: wrap !important;
+  pointer-events: none !important;
+}
+
+.shb-dot {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 20px !important;
+  height: 20px !important;
+  padding: 0 5px !important;
+  border-radius: 10px !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  font-family: Arial, sans-serif !important;
+  line-height: 1 !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.5) !important;
+  border: 1.5px solid rgba(255,255,255,0.8) !important;
+  cursor: default !important;
+  pointer-events: auto !important;
+  white-space: nowrap !important;
+}
+
+td.searchResultsLargeThumbnail {
+  position: relative !important;
+  overflow: visible !important;
+}
