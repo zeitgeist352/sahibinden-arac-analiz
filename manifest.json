@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Sahibinden Araç Analiz",
-  "version": "1.0.0",
+  "version": "1.1",
   "description": "Araç ilanlarında boya/değişen/lokal ve fiyat geçmişini gösterir.",
   "permissions": [],
   "host_permissions": [
