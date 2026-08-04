@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Sahibinden Araç Analiz",
   "version": "1.1",
-  "description": "Araç ilanlarında boya/değişen/lokal ve fiyat geçmişini gösterir.",
+  "description": "Araç ilanlarında boya/değişen/lokal, tramer kaydı ve risk puanını gösterir.",
   "permissions": [],
   "host_permissions": [
     "*://*.sahibinden.com/*",

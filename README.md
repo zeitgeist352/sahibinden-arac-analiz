@@ -1,6 +1,6 @@
 # Sahiden - Sahibinden Araç Analiz & Akıllı İlan Asistanı
 
-![Sahiden Extension Banner](https://img.shields.io/badge/Version-11.0-58a6ff?style=for-the-badge)
+![Sahiden Extension Banner](https://img.shields.io/badge/Version-1.1.0-58a6ff?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-3fb950?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/Platform-Chrome%20%7C%20Edge%20%7C%20Brave-d29922?style=for-the-badge)
 
@@ -27,17 +27,13 @@ A powerful, next-generation browser extension for **Sahibinden.com** car listing
      - 🟡 **Lokal Boyalı (Local Paint):** Partial/spot painting.
      - ⚪ **Orijinal:** Original factory panels.
 
-3. **📉 İlan Fiyat Geçmişi (Price History Timeline)**
-   - Scrapes real-time historical pricing directly from listing detail pages.
-   - Renders a clean vertical timeline showing date-stamped price changes.
-   - Calculates and highlights price drops (⬇ İndirim) or price hikes (⬆ Artış) automatically.
 
-4. **⚠️ & ✅ Red and Green Flags (Manipulative & Positive Seller Terms)**
+3. **⚠️ & ✅ Red and Green Flags (Manipulative & Positive Seller Terms)**
    - **⚠️ Red Flags (Şüpheli Kelimeler):** Detects high-risk or manipulative phrases such as `"sigorta şişirmesi"`, `"çıtır hasarlı"`, `"keyfe keder"`, `"bel altı"`, `"ağır hasar"`, or `"çekme belgeli"`.
    - **✅ Green Flags (Olumlu Terimler):** Highlights positive seller declarations like `"yetkili servis bakımlı"`, `"ilk sahibinden"`, `"garantili"`, `"kazasız"`, `"değişensiz"`, and `"boyasız"`.
    - **Clean UI Rendering:** Boxes only appear when relevant terms are detected in the description, keeping the interface uncluttered.
 
-5. **⚡ High-Performance Architecture**
+4. **⚡ High-Performance Architecture**
    - **Debounced Hover Engine:** Implements a 600ms debounce timer on mouse enter/leave events to ensure background network requests are only triggered on intentional hovers.
    - **Intelligent Caching:** Caches parsed listing details in memory with a 15-minute Time-To-Live (TTL), eliminating redundant network requests when revisiting cards.
    - **Glassmorphism Design:** Beautiful dark-mode UI styling with backdrop blurs, custom CSS variables, and zero interference with Sahibinden's native layout.
@@ -63,16 +59,12 @@ A powerful, next-generation browser extension for **Sahibinden.com** car listing
      - 🟡 **Lokal Boyalı:** Kısmi/lokal boya uygulanmış parçalar.
      - ⚪ **Orijinal:** Fabrika çıkışlı orijinal parçalar.
 
-3. **📉 İlan Fiyat Geçmişi Zaman Çizelgesi**
-   - İlanın geçmiş fiyat hareketlerini doğrudan ilan detay sayfasından çekerek dikey bir zaman çizelgesi (timeline) halinde sunar.
-   - İlk fiyattan son fiyata kadar olan değişimleri hesaplar; **⬇ İndirim**, **⬆ Artış** veya **Fiyat Sabit** rozetleriyle fiyatın yönünü vurgular.
-
-4. **⚠️ Şüpheli Kelimeler & ✅ Olumlu Terimler (Red / Green Flags)**
+3. **⚠️ Şüpheli Kelimeler & ✅ Olumlu Terimler (Red / Green Flags)**
    - **⚠️ Şüpheli Kelimeler (Red Flags):** Satıcıların hasarı gizlemek veya hafifletmek için kullandığı manipülatif terimleri anında yakalar: `"sigorta şişirmesi"`, `"çıtır hasarlı"`, `"keyfe keder"`, `"bel altı boyalı"`, `"ağır hasar"`, `"çekme belgeli"`, `"şişirme"`.
    - **✅ Olumlu Terimler (Green Flags):** Satıcının araçla ilgili verdiği güvence beyanlarını ön plana çıkarır: `"yetkili servis bakımlı"`, `"ilk sahibinden"`, `"garantili"`, `"kazasız"`, `"değişensiz"`, `"boyasız"`, `"tramersiz"`.
    - **Dinamik UI Üretimi:** Açıklamada herhangi bir şüpheli veya olumlu kelime yoksa gereksiz boş kutular gösterilmez; arayüz her zaman temiz ve odaklanabilir kalır.
 
-5. **⚡ Üstün Performans ve Gelişmiş Mimari**
+4. **⚡ Üstün Performans ve Gelişmiş Mimari**
    - **Debouncing (Gecikmeli Tetikleme):** İmleç kartlar arasında hızlıca dolaşırken gereksiz ağ istekleri yapılmaması için 600ms gecikme koruması uygulanır.
    - **15 Dakikalık Akıllı Ön Bellek (Cache):** Analiz edilen bir ilanın verileri bellekte saklanır; aynı ilanın üzerine tekrar gelindiğinde sıfır gecikme ve sıfır ağ isteğiyle anında gösterilir.
    - **Modern Karanlık Mod Tasarımı:** Göz yormayan estetik renk paleti, mikro animasyonlar ve yüksek kontrastlı tipografi ile Sahibinden arayüzüne kusursuz bütünleşir.

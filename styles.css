@@ -239,101 +239,6 @@
   line-height: 1.4 !important;
 }
 
-/* Price History Section */
-.shb-history-header {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  margin-bottom: 4px !important;
-}
-
-.shb-history-empty {
-  font-size: 12px !important;
-  color: #8B949E !important;
-  font-style: italic !important;
-  padding: 4px 0 !important;
-}
-
-.shb-price-badge {
-  font-size: 11px !important;
-  font-weight: 700 !important;
-  padding: 2px 7px !important;
-  border-radius: 6px !important;
-}
-
-.shb-badge-drop {
-  background: rgba(63, 185, 80, 0.18) !important;
-  color: #3FB950 !important;
-  border: 1px solid rgba(63, 185, 80, 0.35) !important;
-}
-
-.shb-badge-rise {
-  background: rgba(248, 81, 73, 0.18) !important;
-  color: #FF7B72 !important;
-  border: 1px solid rgba(248, 81, 73, 0.35) !important;
-}
-
-.shb-badge-neutral {
-  background: rgba(139, 148, 158, 0.18) !important;
-  color: #8B949E !important;
-  border: 1px solid rgba(139, 148, 158, 0.35) !important;
-}
-
-/* Vertical Timeline */
-.shb-timeline {
-  display: flex !important;
-  flex-direction: column !important;
-  position: relative !important;
-  margin-top: 6px !important;
-  padding-left: 14px !important;
-  border-left: 1.5px solid rgba(255, 255, 255, 0.15) !important;
-  gap: 8px !important;
-}
-
-.shb-timeline-item {
-  display: flex !important;
-  align-items: center !important;
-  position: relative !important;
-}
-
-.shb-timeline-marker {
-  position: absolute !important;
-  left: -18px !important;
-  width: 7px !important;
-  height: 7px !important;
-  border-radius: 50% !important;
-  background: #8B949E !important;
-  border: 1.5px solid #161B22 !important;
-}
-
-.shb-timeline-latest .shb-timeline-marker {
-  background: #58A6FF !important;
-  box-shadow: 0 0 6px rgba(88, 166, 255, 0.8) !important;
-  width: 9px !important;
-  height: 9px !important;
-  left: -19px !important;
-}
-
-.shb-timeline-content {
-  display: flex !important;
-  justify-content: space-between !important;
-  width: 100% !important;
-  font-size: 12.5px !important;
-}
-
-.shb-timeline-date {
-  color: #8B949E !important;
-}
-
-.shb-timeline-price {
-  font-weight: 700 !important;
-  color: #E6EDF3 !important;
-}
-
-.shb-timeline-latest .shb-timeline-price {
-  color: #58A6FF !important;
-}
-
 /* Visual Expertise Diagram */
 .shb-diagram-container {
   display: flex !important;
@@ -388,3 +293,73 @@
 .shb-dot-boya { background: #58A6FF !important; box-shadow: 0 0 5px rgba(88, 166, 255, 0.6) !important; }
 .shb-dot-lokal { background: #D29922 !important; box-shadow: 0 0 5px rgba(210, 153, 34, 0.6) !important; }
 .shb-dot-orijinal { background: rgba(255, 255, 255, 0.2) !important; border: 1px solid rgba(255,255,255,0.4) !important; }
+
+.shb-summary-card {
+  gap: 8px !important;
+}
+
+.shb-summary-top {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 8px 10px !important;
+  border-radius: 8px !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.shb-summary-safe {
+  color: #3FB950 !important;
+}
+
+.shb-summary-warning {
+  color: #D29922 !important;
+}
+
+.shb-summary-danger {
+  color: #FF7B72 !important;
+}
+
+.shb-summary-badge {
+  min-width: 46px !important;
+  text-align: center !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  padding: 5px 7px !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.shb-summary-title {
+  font-size: 12.5px !important;
+  font-weight: 700 !important;
+}
+
+.shb-summary-text {
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  color: #E6EDF3 !important;
+}
+
+.shb-summary-subtitle {
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  color: #8B949E !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.4px !important;
+}
+
+.shb-question-list {
+  margin: 0 !important;
+  padding: 0 0 0 12px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  color: #E6EDF3 !important;
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+}
+
+.shb-question-item {
+  list-style: none !important;
+}

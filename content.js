@@ -1,4 +1,3 @@
-// content.js v11 - DOM Scraping for Price History & Visual Ekspertiz Şeması
 (function () {
   'use strict';
 
@@ -14,7 +13,6 @@
       "bel altı",
       "keyfe keder",
       "çekme belgeli",
-      "masrafsız",
       "ağır hasar"
     ],
     GREEN_FLAGS: [
@@ -555,6 +553,52 @@
 
       const displayValue = data.tramer.message || data.tramer.text || "Belirtilmemiş";
 
+      const exp = data.expertise || { degisen: 0, boya: 0, lokalBoya: 0, partStates: {}, hasExpertise: false };
+      const redFlags = Array.isArray(data.redFlags) ? data.redFlags : [];
+      const greenFlags = Array.isArray(data.greenFlags) ? data.greenFlags : [];
+      const expertiseCount = (exp.degisen || 0) + (exp.boya || 0) + (exp.lokalBoya || 0);
+
+      let riskScore = 20;
+      if (data.tramer.status === 'DAMAGED') riskScore += 35;
+      else if (data.tramer.status === 'UNCERTAIN') riskScore += 15;
+      riskScore += Math.min(20, expertiseCount * 8);
+      riskScore += Math.min(15, redFlags.length * 5);
+      if (!data.priceHistory || !data.priceHistory.success) riskScore += 5;
+      if (greenFlags.length > 0) riskScore = Math.max(10, riskScore - 8);
+      riskScore = Math.min(100, Math.max(10, riskScore));
+
+      let summaryLevel = 'Düşük Risk';
+      let summaryClass = 'shb-summary-safe';
+      let summaryIcon = '✅';
+      if (riskScore >= 70) {
+        summaryLevel = 'Yüksek Risk';
+        summaryClass = 'shb-summary-danger';
+        summaryIcon = '⚠️';
+      } else if (riskScore >= 40) {
+        summaryLevel = 'Orta Risk';
+        summaryClass = 'shb-summary-warning';
+        summaryIcon = '🔎';
+      }
+
+      const summaryText = riskScore >= 70
+        ? 'Bu ilan yüksek dikkat gerektiriyor; hasar, boya ve şüpheli ifadeler birlikte görülüyor.'
+        : riskScore >= 40
+          ? 'Bazı risk işaretleri var. Ayrıntıları teyit etmek mantıklı olur.'
+          : 'Görünürde temiz bir profil var; yine de kritik alanları kontrol etmek iyi olur.';
+
+      const followUpQuestions = [];
+      if (data.tramer.status === 'DAMAGED' || data.tramer.status === 'UNCERTAIN') {
+        followUpQuestions.push('Hasar raporu veya tramer bilgisi var mı?');
+      }
+      if (redFlags.length > 0) {
+        followUpQuestions.push('Açıklamadaki riskli ifadelerin nedeni nedir?');
+      }
+      if (greenFlags.length === 0) {
+        followUpQuestions.push('Aracın servis kaydı var mı?');
+      }
+
+      const summaryQuestionsHtml = followUpQuestions.slice(0, 4).map(q => `<li class="shb-question-item">• ${q}</li>`).join('');
+
       const tramerHtml = `
         <div class="shb-section">
           <div class="shb-section-title">
@@ -568,8 +612,24 @@
         </div>
       `;
 
+      const summaryHtml = `
+        <div class="shb-section shb-summary-card">
+          <div class="shb-section-title">
+            <span class="shb-sec-icon">${summaryIcon}</span> Risk Puanı
+          </div>
+          <div class="shb-summary-top ${summaryClass}">
+            <div class="shb-summary-badge">${riskScore}/100</div>
+            <div>
+              <div class="shb-summary-title">${summaryLevel}</div>
+              <div class="shb-summary-text">${summaryText}</div>
+            </div>
+          </div>
+          <div class="shb-summary-subtitle">Sormanız gereken sorular</div>
+          <ul class="shb-question-list">${summaryQuestionsHtml}</ul>
+        </div>
+      `;
+
       // Section 2: Ekspertiz Durumu (Visual Car Diagram)
-      const exp = data.expertise || { degisen: 0, boya: 0, lokalBoya: 0, partStates: {}, hasExpertise: false };
       const getPartColor = (state) => {
         if (state === 'degisen') return { fill: 'rgba(255, 123, 114, 0.75)', stroke: '#FF7B72', label: 'Değişen' };
         if (state === 'boya') return { fill: 'rgba(88, 166, 255, 0.75)', stroke: '#58A6FF', label: 'Boyalı' };
@@ -661,64 +721,7 @@
         </div>
       `;
 
-      // Section 3: Price History (Scraped from DOM)
-      let priceHistoryHtml = '';
-      if (!data.priceHistory || !data.priceHistory.success || !Array.isArray(data.priceHistory.data) || data.priceHistory.data.length === 0) {
-        priceHistoryHtml = `
-          <div class="shb-section shb-section-history">
-            <div class="shb-section-title">
-              <span class="shb-sec-icon">📉</span> İlan Fiyat Geçmişi
-            </div>
-            <div class="shb-history-empty">Fiyat geçmişi bulunamadı.</div>
-          </div>
-        `;
-      } else {
-        const history = data.priceHistory.data;
-        const firstPrice = Number(history[0].price);
-        const lastPrice = Number(history[history.length - 1].price);
-        const diff = lastPrice - firstPrice;
-
-        let badgeHtml = '';
-        if (diff < 0) {
-          const dropStr = Math.abs(diff).toLocaleString('tr-TR');
-          badgeHtml = `<span class="shb-price-badge shb-badge-drop">⬇ ${dropStr} TL İndirim</span>`;
-        } else if (diff > 0) {
-          const riseStr = diff.toLocaleString('tr-TR');
-          badgeHtml = `<span class="shb-price-badge shb-badge-rise">⬆ ${riseStr} TL Artış</span>`;
-        } else {
-          badgeHtml = `<span class="shb-price-badge shb-badge-neutral">Fiyat Sabit</span>`;
-        }
-
-        const timelineItems = history.map((item, idx) => {
-          const priceStr = Number(item.price).toLocaleString('tr-TR') + ' TL';
-          const isLatest = idx === history.length - 1;
-          return `
-            <div class="shb-timeline-item ${isLatest ? 'shb-timeline-latest' : ''}">
-              <div class="shb-timeline-marker"></div>
-              <div class="shb-timeline-content">
-                <span class="shb-timeline-date">${item.date}</span>
-                <span class="shb-timeline-price">${priceStr}</span>
-              </div>
-            </div>
-          `;
-        }).join('');
-
-        priceHistoryHtml = `
-          <div class="shb-section shb-section-history">
-            <div class="shb-history-header">
-              <div class="shb-section-title">
-                <span class="shb-sec-icon">📉</span> İlan Fiyat Geçmişi
-              </div>
-              ${badgeHtml}
-            </div>
-            <div class="shb-timeline">
-              ${timelineItems}
-            </div>
-          </div>
-        `;
-      }
-
-      // Section 4: Red Flags
+      // Section 3: Red Flags
       let redFlagsHtml = '';
       if (data.redFlags && data.redFlags.length > 0) {
         const listItems = data.redFlags.map(flag => `<li>• <strong class="shb-flag-word">${flag}</strong></li>`).join('');
@@ -735,7 +738,7 @@
         `;
       }
 
-      // Section 5: Green Flags
+      // Section 4: Green Flags
       let greenFlagsHtml = '';
       if (data.greenFlags && data.greenFlags.length > 0) {
         const listItems = data.greenFlags.map(flag => `<li>• <strong class="shb-flag-word-green">${flag}</strong></li>`).join('');
@@ -759,8 +762,8 @@
         </div>
         <div class="shb-popup-body">
           ${tramerHtml}
+          ${summaryHtml}
           ${expertiseHtml}
-          ${priceHistoryHtml}
           ${redFlagsHtml}
           ${greenFlagsHtml}
         </div>
