@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <title>Sahiden Ayarları</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main>
+    <h1>🔍 Sahiden Ayarları</h1>
+
+    <section>
+      <h2>Kelime listeleri</h2>
+      <p class="hint">Her satıra bir ifade yazın. Büyük/küçük harf fark etmez; ifade kelime başında aranır ("pert", "ekspertiz" içinde eşleşmez).</p>
+      <div class="grid">
+        <label>
+          <span>⚠️ Şüpheli kelimeler</span>
+          <textarea id="redFlags" rows="12" spellcheck="false"></textarea>
+        </label>
+        <label>
+          <span>✅ Olumlu terimler</span>
+          <textarea id="greenFlags" rows="12" spellcheck="false"></textarea>
+        </label>
+      </div>
+      <label class="check">
+        <input type="checkbox" id="marketComparison">
+        Arama sayfasında piyasa karşılaştırmasını göster (aynı model, yıl ±1, yakın km)
+      </label>
+      <div class="actions">
+        <button id="save" class="primary">Kaydet</button>
+        <button id="reset">Varsayılanlara dön</button>
+        <span id="saveStatus" class="status"></span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Fiyat geçmişi</h2>
+      <p class="hint">Gördüğünüz ilanların fiyatları yalnızca bu tarayıcıda saklanır; 180 gün görülmeyen ilanlar otomatik silinir.</p>
+      <p id="historyStats" class="stats">Yükleniyor…</p>
+      <div class="actions">
+        <button id="export">Dışa aktar (JSON)</button>
+        <button id="clear" class="danger">Fiyat geçmişini temizle</button>
+        <span id="historyStatus" class="status"></span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Sayfa yapısı kontrolü</h2>
+      <p class="hint">Sahibinden sayfa yapısını değiştirirse eklenti bazı verileri okuyamaz. Tespit edilen sorunlar burada listelenir.</p>
+      <ul id="healthList" class="health"></ul>
+      <div class="actions">
+        <button id="clearHealth">Listeyi temizle</button>
+      </div>
+    </section>
+  </main>
+  <script src="defaults.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
