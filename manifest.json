@@ -5,17 +5,19 @@
   "description": "Araç ilanlarında boya/değişen/lokal, tramer kaydı ve risk puanını gösterir.",
   "permissions": [],
   "host_permissions": [
-    "*://*.sahibinden.com/*",
-    "https://api.ourdomain.com/*"
+    "*://*.sahibinden.com/*"
   ],
-  "background": {
-    "service_worker": "background.js"
-  },
   "content_scripts": [
     {
-      "matches": ["*://*.sahibinden.com/*"],
-      "js": ["content.js"],
-      "css": ["styles.css"],
+      "matches": [
+        "*://*.sahibinden.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
       "run_at": "document_idle"
     }
   ],
