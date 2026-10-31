@@ -21,17 +21,30 @@ Thank you for your interest in contributing to Sahibinden Araç Analiz!
 3. Click "Load unpacked"
 4. Select this project folder
 
+### Running Tests
+
+The extraction logic (tramer parsing, flags, market comparison, settings) has a Node test suite with no dependencies:
+
+```bash
+node --test tests/*.test.js
+```
+
+Add a test case for every new phrase or edge case you teach the parser.
+
 ### Debugging
 
 - Open DevTools on any Sahibinden.com page (F12)
 - Check the Console tab for logs prefixed with `[SHB]`
 - Use the DOM inspector to verify elements are being targeted correctly
+- All selectors live in `CONFIG.SELECTORS` in `content.js`. If Sahibinden changes its markup, the extension shows a warning banner and lists the problem on the options page
+- Price history, settings and health reports are stored in `chrome.storage.local`. Inspect them from the options page, or with `chrome.storage.local.get(null)` in the extension's DevTools
 
 ## Code Style
 
 - Keep code clean and readable
 - Add comments for complex logic
-- Test on actual Sahibinden.com listings before submitting
+- Run the test suite and test on actual Sahibinden.com listings before submitting
+- Escape any text taken from the page (`Utils.escapeHtml`) before putting it into `innerHTML`
 
 ## Bug Reports
 
